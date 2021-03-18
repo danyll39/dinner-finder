@@ -1,15 +1,15 @@
 const search = document.getElementById('search'),
     submit = document.getElementById('submit'),
     random = document.getElementById('random'),
-    mealsEl = document.getElementById('meals'),
+    drinksEl = document.getElementById('drinks'),
     resultHeading = document.getElementById('result-heading'),
-    single_mealEl = document.getElementById('single-meal');
-// Search meal and fetch from API
-function searchMeal(e) {
+    single_drinkEl = document.getElementById('single-drink');
+// Search drink and fetch from API
+function searchDrink(e) {
     e.preventDefault();
 
-    // Clear Single Meal
-    single_mealEl.innerHTML = '';
+    // Clear Single drink
+    single_drinkEl.innerHTML = '';
 
     //Get Search Term
     const term = search.value;
@@ -23,10 +23,10 @@ function searchMeal(e) {
                 if (data.drinks === null) {
                     resultHeading.innerHTML = `<p>There are no search results. Try again</p>`
                 } else {
-                    mealsEl.innerHTML = data.drinks.map(drink => `
-            <div class="meal">
+                    drinksEl.innerHTML = data.drinks.map(drink => `
+            <div class="drink">
             <img src="${drink.strDrinkThumb}"  alt="${drink.strDrink}" />
-            <div class="meal-info" data-mealid="${drink.idDrink}">
+            <div class="drink-info" data-drinkid="${drink.idDrink}">
             <h3>${drink.strDrink}</h3>
             </div>
             </div>
@@ -55,7 +55,7 @@ function getDrinkById(drinkID) {
 // Fetch random drink from API
 function getRandomDrink() {
     //Clear Drinks and heading
-    mealsEl.innerHTML = ''
+    drinksEl.innerHTML = ''
     resultHeading.innerHTML = ''
 
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
@@ -79,11 +79,11 @@ function addDrinkToDOM(drink) {
 
         }
     }
-    single_mealEl.innerHTML = `
-<div class="single-meal">
+    single_drinkEl.innerHTML = `
+<div class="single-drink">
 <h1>${drink.strDrink}</h1>
 <img  src="${drink.strDrinkThumb}" alt="${drink.strDrink}" />
-<div class="single-meal-info">
+<div class="single-drink-info">
 ${drink.strCategory ? `<p>${drink.strCategory}</p>` : ''}
 ${drink.strArea ? `<p>${drink.strArea}</p>` : ''}
 </div>
@@ -99,14 +99,14 @@ ${ingredients.map(ing => `<li>${ing}</li>`).join('')}
 
 
 //Event Listener
-submit.addEventListener('submit', searchMeal);
+submit.addEventListener('submit', searchDrink);
 random.addEventListener('click', getRandomDrink);
 
 
-mealsEl.addEventListener('click', e => {
+drinksEl.addEventListener('click', e => {
     const drinkInfo = e.path.find(item => {
         if (item.classList) {
-            return item.classList.contains('meal-info')
+            return item.classList.contains('drink-info')
         } else {
             return false
         }
@@ -114,7 +114,7 @@ mealsEl.addEventListener('click', e => {
 
     })
     if (drinkInfo) {
-        const drinkId = drinkInfo.getAttribute('data-mealid')
+        const drinkId = drinkInfo.getAttribute('data-drinkid')
         getDrinkById(drinkId)
     }
 })
