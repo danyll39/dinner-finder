@@ -4,14 +4,13 @@ const search = document.getElementById('search'),
     drinksEl = document.getElementById('drinks'),
     resultHeading = document.getElementById('result-heading'),
     single_drinkEl = document.getElementById('single-drink');
+
 // Search drink and fetch from API
 function searchDrink(e) {
     e.preventDefault();
-
     // Clear Single drink
     single_drinkEl.innerHTML = '';
-
-    //Get Search Term
+    // Get Search Term
     const term = search.value;
     // Check for empty
     if (term.trim()) {
@@ -33,16 +32,15 @@ function searchDrink(e) {
             `)
                         .join('')
                 }
-
             })
-        //Clear search text
+        // Clear search text
         search.value = ''
     } else {
         alert('Please enter a search term')
     }
 }
 
-//Fetch drink by ID
+// Fetch drink by ID
 function getDrinkById(drinkID) {
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkID}`)
         .then(res => res.json())
@@ -59,13 +57,11 @@ function getRandomDrink() {
     resultHeading.innerHTML = ''
 
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
-    .then(res => res.json())
-    .then(data => {
-        const drink = data.drinks[0]
-
-        addDrinkToDOM(drink)
-    })
-
+        .then(res => res.json())
+        .then(data => {
+            const drink = data.drinks[0]
+            addDrinkToDOM(drink)
+        })
 }
 //Add drink to DOM
 function addDrinkToDOM(drink) {
@@ -76,7 +72,6 @@ function addDrinkToDOM(drink) {
             ingredients.push(`${drink[`strIngredient${i}`]} - ${drink[`strMeasure${i}`]} `)
         } else {
             break
-
         }
     }
     single_drinkEl.innerHTML = `
@@ -97,11 +92,9 @@ ${ingredients.map(ing => `<li>${ing}</li>`).join('')}
 </div>`
 }
 
-
-//Event Listener
+// Event Listener
 submit.addEventListener('submit', searchDrink);
 random.addEventListener('click', getRandomDrink);
-
 
 drinksEl.addEventListener('click', e => {
     const drinkInfo = e.path.find(item => {
@@ -110,8 +103,6 @@ drinksEl.addEventListener('click', e => {
         } else {
             return false
         }
-
-
     })
     if (drinkInfo) {
         const drinkId = drinkInfo.getAttribute('data-drinkid')
