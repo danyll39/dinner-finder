@@ -3,7 +3,7 @@
   }
   
   body {
-    background: #2d2013;
+    background: #023c57;
     color: #fff;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
@@ -107,7 +107,7 @@
   .single-drink-info {
     margin: 20px;
     padding: 10px;
-    border: 2px #e09850 dashed;
+    border: 2px #218185 dashed;
     border-radius: 5px;
   }
   

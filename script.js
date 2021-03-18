@@ -24,10 +24,10 @@ function searchDrink(e) {
                 } else {
                     drinksEl.innerHTML = data.drinks.map(drink => `
             <div class="drink">
-            <img src="${drink.strDrinkThumb}"  alt="${drink.strDrink}" />
-            <div class="drink-info" data-drinkid="${drink.idDrink}">
-            <h3>${drink.strDrink}</h3>
-            </div>
+                <img src="${drink.strDrinkThumb}"  alt="${drink.strDrink}" />
+                <div class="drink-info" data-drinkid="${drink.idDrink}">
+                    <h3>${drink.strDrink}</h3>
+                </div>
             </div>
             `)
                         .join('')
@@ -76,19 +76,19 @@ function addDrinkToDOM(drink) {
     }
     single_drinkEl.innerHTML = `
 <div class="single-drink">
-<h1>${drink.strDrink}</h1>
-<img  src="${drink.strDrinkThumb}" alt="${drink.strDrink}" />
-<div class="single-drink-info">
-${drink.strCategory ? `<p>${drink.strCategory}</p>` : ''}
-${drink.strArea ? `<p>${drink.strArea}</p>` : ''}
-</div>
-<div class="main">
-<p>${drink.strInstructions}</p>
-<h2>Ingredients</h2>
-<ul>
-${ingredients.map(ing => `<li>${ing}</li>`).join('')}
-</ul>
-</div>
+    <h1>${drink.strDrink}</h1>
+        <img  src="${drink.strDrinkThumb}" alt="${drink.strDrink}" />
+    <div class="single-drink-info">
+        ${drink.strCategory ? `<p>${drink.strCategory}</p>` : ''}
+        ${drink.strArea ? `<p>${drink.strArea}</p>` : ''}
+    </div>
+    <div class="main">
+        <p>${drink.strInstructions}</p>
+        <h2>Ingredients</h2>
+            <ul>
+                ${ingredients.map(ing => `<li>${ing}</li>`).join('')}
+            </ul>
+     </div>
 </div>`
 }
 
